@@ -1,9 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_app/models/weather_model.dart';
-import 'package:weather_app/screens/no_weather_body.dart';
-import 'package:weather_app/screens/weather_body.dart';
-import 'package:weather_app/services/weather_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/cubits/get_weather_cubit/get_weather_cubit.dart';
+import 'package:weather_app/screens/home_screen.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -15,10 +13,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'weather app',
-      debugShowCheckedModeBanner: false,
-      home: NoWeatherBody(),
+    return BlocProvider(
+      create: (context) => GetWeatherCubit(),
+      child: MaterialApp(
+        title: 'weather app',
+        debugShowCheckedModeBanner: false,
+        home: HomeScreen(),
+      ),
     );
   }
 }
